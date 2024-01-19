@@ -9,10 +9,10 @@ const App = ({ api }) => {
   return (
     <><Header />
 
-      <ProductGrid productsCount={4} api="https://brostore.uz/collections/ochki-virtualnoj-realnosti" name="Очки виртуальной реальности" />
-      <ProductGrid productsCount={4} api={"https://brostore.uz/collections/igrovye-pristavki"} name="Игровые приставки" />
-      <ProductGrid productsCount={4} api={"https://brostore.uz/collections/dyson"} name="Dyson" />
-      <ProductGrid productsCount={4} api={"https://brostore.uz/collections/roborock"}  name="Roborock" />
+      <ProductGrid productsCount={4} api={"ochki-virtualnoj-realnosti"} name="Очки виртуальной реальности" />
+      <ProductGrid productsCount={4} api={"igrovye-pristavki"} name="Игровые приставки" />
+      <ProductGrid productsCount={4} api={"dyson"} name="Dyson" />
+      <ProductGrid productsCount={4} api={"roborock"}  name="Roborock" />
       
       <Footer />
     </>
