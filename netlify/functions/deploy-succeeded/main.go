@@ -47,9 +47,11 @@ func handleRequests() {
 }
 
 func parseURL(w http.ResponseWriter, r *http.Request) {
-	// Handle AWS Lambda Proxy Request
-	ctx := context.Background()
-	requestBody := RequestBody{}
+	w.Header().Set("Content-Type", "application/json")
+
+	var requestBody struct {
+		URL string `json:"url"`
+	}
 
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&requestBody); err != nil {
@@ -57,14 +59,18 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Reset the products slice before scraping new data
-	products = nil
-
 	// Print the URL from the request body
-	fmt.Println("[POST]: url: " + requestBody.Payload.Context)
+	fmt.Println(requestBody.URL)
+
+	// Reset the body so it can be read again
+	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
+	if err := r.Body.Close(); err != nil {
+		http.Error(w, "Error closing request body", http.StatusInternalServerError)
+		return
+	}
 
 	// Scrape data from the provided URL
-	scrapeBrostore(w, requestBody.Payload.Context)
+	scrapeBrostore(w, requestBody.URL)
 
 	// Return the parsed data as JSON
 	jsonData, err := json.Marshal(products)
