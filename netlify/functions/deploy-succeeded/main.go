@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context"
+	// "context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -11,6 +11,11 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/rs/cors"
+
+	"regexp"
+	"errors"
+	"strconv"
+
 )
 
 type Product struct {
@@ -46,31 +51,31 @@ func handleRequests() {
 	http.ListenAndServe(":"+port, nil)
 }
 
-func parseURL(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+type Payload struct {
+    Context string `json:"context"`
+}
 
-	var requestBody struct {
-		URL string `json:"url"`
-	}
+type RequestBody struct {
+    Payload Payload `json:"payload"`
+}
+
+func parseURL(w http.ResponseWriter, r *http.Request) {
+	// Handle AWS Lambda Proxy Request
+	ctx := context.Background()
+	requestBody := RequestBody{}
 
 	decoder := json.NewDecoder(r.Body)
+	var requestBody map[string]string
 	if err := decoder.Decode(&requestBody); err != nil {
 		http.Error(w, "Error decoding request body", http.StatusBadRequest)
 		return
 	}
 
 	// Print the URL from the request body
-	fmt.Println(requestBody.URL)
-
-	// Reset the body so it can be read again
-	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
-	if err := r.Body.Close(); err != nil {
-		http.Error(w, "Error closing request body", http.StatusInternalServerError)
-		return
-	}
+	fmt.Println("[POST]: url: " + requestBody.Payload.Context)
 
 	// Scrape data from the provided URL
-	scrapeBrostore(w, requestBody.URL)
+	scrapeBrostore(w, requestBody.Payload.Context)
 
 	// Return the parsed data as JSON
 	jsonData, err := json.Marshal(products)
@@ -80,6 +85,9 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(jsonData)
 }
+
+
+
 
 func scrapeBrostore(w http.ResponseWriter, url string) {
 	// Set a user-agent to mimic a browser request
