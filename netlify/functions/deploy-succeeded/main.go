@@ -79,7 +79,7 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 	// Extract the URL from the request body
 	url, exists := requestBody["context"]
 	if !exists {
-		http.Error(w, "URL not found in request body", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("URL not found in request body %s", url), http.StatusBadRequest)
 		return
 	}
 
