@@ -1,0 +1,79 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.wheel {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slice {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.slice:nth-child(1) {
+  background-color: #ff5252; /* Red */
+  transform: rotate(0deg);
+}
+
+.slice:nth-child(2) {
+  background-color: #ff6b6b; /* Light Red */
+  transform: rotate(36deg);
+}
+
+.slice:nth-child(3) {
+  background-color: #ffa07a; /* Light Salmon */
+  transform: rotate(72deg);
+}
+
+.slice:nth-child(4) {
+  background-color: #ffa07a; /* Light Salmon */
+  transform: rotate(108deg);
+}
+
+.slice:nth-child(5) {
+  background-color: #ffd700; /* Gold */
+  transform: rotate(144deg);
+}
+
+.slice:nth-child(6) {
+  background-color: #ffd700; /* Gold */
+  transform: rotate(180deg);
+}
+
+.slice:nth-child(7) {
+  background-color: #7fff00; /* Chartreuse */
+  transform: rotate(216deg);
+}
+
+.slice:nth-child(8) {
+  background-color: #7fff00; /* Chartreuse */
+  transform: rotate(252deg);
+}
+
+.slice:nth-child(9) {
+  background-color: #00ff00; /* Lime */
+  transform: rotate(288deg);
+}
+
+.slice:nth-child(10) {
+  background-color: #00ff00; /* Lime */
+  transform: rotate(324deg);
+}
+
+.discount {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
