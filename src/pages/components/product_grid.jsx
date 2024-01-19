@@ -13,7 +13,7 @@ const ProductItem = ({ productsCount, api , link, name}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://himarket.uz/.netlify/functions/deploy-succeeded/api/parse/", {
+        const response = await fetch("https://himarket.uz/.netlify/functions/API/api/parse/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
