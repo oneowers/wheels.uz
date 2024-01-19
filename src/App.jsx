@@ -20,14 +20,14 @@ export default function App() {
         <Route path="/product/:id" index element={<View />} />
         <Route path="/discounts" element={<FortuneWheel />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/apple" element={<ProductList productsCount={100} api="https://brostore.uz/collections/apple" />} />
-        <Route path="/xiaomi" element={<ProductList productsCount={100} api="https://brostore.uz/collections/xiaomi" />} />
-        <Route path="/samsung" element={<ProductList productsCount={100} api="https://brostore.uz/collections/smartfony-samsung" />} />
-        <Route path="/desktop" element={<ProductList productsCount={100} api="https://brostore.uz/collections/monobloki" />} />
-        <Route path="/laptops" element={<ProductList productsCount={100} api="https://brostore.uz/collections/noutbuki" />} />
-        <Route path="/mobile" element={<ProductList productsCount={100} api="https://brostore.uz/collections/iphone" />} />
-        <Route path="/tablets" element={<ProductList productsCount={100} api="https://brostore.uz/collections/ipad-series" />} />
-        <Route path="/headphones" element={<ProductList productsCount={100} api="https://brostore.uz/collections/besprovodnye-naushniki-apple" />} />
+        <Route path="/apple" element={<ProductList productsCount={100} api="apple" />} />
+        <Route path="/xiaomi" element={<ProductList productsCount={100} api="xiaomi" />} />
+        <Route path="/samsung" element={<ProductList productsCount={100} api="smartfony-samsung" />} />
+        <Route path="/desktop" element={<ProductList productsCount={100} api="monobloki" />} />
+        <Route path="/laptops" element={<ProductList productsCount={100} api="noutbuki" />} />
+        <Route path="/mobile" element={<ProductList productsCount={100} api="iphone" />} />
+        <Route path="/tablets" element={<ProductList productsCount={100} api="ipad-series" />} />
+        <Route path="/headphones" element={<ProductList productsCount={100} api="besprovodnye-naushniki-apple" />} />
         <Route path="/other" element={<Other />} />
         
       </Routes>
