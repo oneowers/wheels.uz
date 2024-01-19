@@ -20,6 +20,9 @@ type Payload struct {
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
+	fmt.Print("Hello, ")
+    fmt.Print("world!")
+	
 	requestBody := RequestBody{}
 	json.Unmarshal([]byte(request.Body), &requestBody)
 
