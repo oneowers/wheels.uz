@@ -62,10 +62,7 @@ type RequestBody struct {
 }
 
 func parseURL(w http.ResponseWriter, r *http.Request) {
-	// Handle AWS Lambda Proxy Request
-	ctx := context.Background()
-	requestBody := RequestBody{}
-
+	// Decode the URL directly from the request body
 	decoder := json.NewDecoder(r.Body)
 	var requestBody map[string]string
 	if err := decoder.Decode(&requestBody); err != nil {
@@ -73,11 +70,23 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Print the URL from the request body
-	fmt.Println("[POST]: url: " + requestBody.Payload.Context)
+	// Reset the products slice before scraping new data
+	products = nil
+
+	// Print the entire request body for debugging purposes
+	fmt.Println("[POST]: Request Body:", requestBody)
+
+	// Extract the URL from the request body
+	url, exists := requestBody["context"]
+	if !exists {
+		http.Error(w, "URL not found in request body", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Println("[POST]: url:", url)
 
 	// Scrape data from the provided URL
-	scrapeBrostore(w, requestBody.Payload.Context)
+	scrapeBrostore(w, url)
 
 	// Return the parsed data as JSON
 	jsonData, err := json.Marshal(products)
