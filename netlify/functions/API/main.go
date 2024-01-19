@@ -21,7 +21,6 @@ type Product struct {
 	Link         string `json:"link"`
 }
 
-var products []Product
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	textFromBody := request.Body
@@ -44,6 +43,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 }
 
 func scrapeBrostore(url string) (string, error) {
+	var products []Product
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://brostore.uz/collections/" + url + "/", nil)
