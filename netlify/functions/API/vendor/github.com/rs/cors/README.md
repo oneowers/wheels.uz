@@ -40,7 +40,7 @@ Then run your server:
 
 The server now runs on `localhost:8080`:
 
-    $ curl -D - -H 'Origin: http://foo.com' https://himarket.uz/.netlify/functions/deploy-succeeded/
+    $ curl -D - -H 'Origin: http://foo.com' http://localhost:8080/
     HTTP/1.1 200 OK
     Access-Control-Allow-Origin: foo.com
     Content-Type: application/json
