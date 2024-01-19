@@ -15,7 +15,19 @@
     }
   }
   
-  .fade-in {
+  .fade-in-1 {
+    animation: fadeIn ease-in-out 0.1s;
+  }
+  .fade-in-2 {
+    animation: fadeIn ease-in-out 0.2s;
+  }
+  .fade-in-3 {
+    animation: fadeIn ease-in-out 0.3s;
+  }
+  .fade-in-4 {
     animation: fadeIn ease-in-out 0.4s;
+  }
+  .fade-in-5 {
+    animation: fadeIn ease-in-out 0.5s;
   }
   

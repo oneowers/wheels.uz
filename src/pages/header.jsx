@@ -1,32 +1,27 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { Link } from 'react-router-dom';
+
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
   CubeIcon,
   DevicePhoneMobileIcon,
   ComputerDesktopIcon,
   DeviceTabletIcon,
   MusicalNoteIcon,
-  SpeakerWaveIcon,
   ClockIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import Logo from './himarket.png'
 
 const products = [
-    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '#', icon: ComputerDesktopIcon },
-    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '#', icon: CubeIcon },
-    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '#', icon: DevicePhoneMobileIcon },
-    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '#', icon: DeviceTabletIcon },
-    { name: 'Акустика', description: 'Качественная акустика для стратегических воронок конверсии', href: '#', icon: SpeakerWaveIcon },
-    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '#', icon: MusicalNoteIcon },
-    { name: 'Умные часы', description: 'Интеллектуальные часы с уникальными функциональными возможностями', href: '#', icon: ClockIcon },
+    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '/laptops/', icon: ComputerDesktopIcon },
+    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '/desktop/', icon: CubeIcon },
+    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '/mobile/', icon: DevicePhoneMobileIcon },
+    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '/tablets/', icon: DeviceTabletIcon },
+    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '/headphones/', icon: MusicalNoteIcon },
+    { name: 'Умные часы', description: 'Интеллектуальные часы с уникальными функциональными возможностями', href: '/watches/', icon: ClockIcon },
   ];
   
   
@@ -44,12 +39,13 @@ export default function Example() {
 
   return (
     <header className="bg-white">
+    <p class="flex h-12 text-center items-center justify-center bg-gray-900 px-10 text-sm  lg:text-md font-medium text-white sm:px-15 lg:px-18">Nasiya 0% •  Купите телефон в рассрочку на 6 месяцев с 0% </p>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to={"/"} className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img className="h-10 w-auto" src={Logo} alt="" />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -61,10 +57,10 @@ export default function Example() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+        <Popover.Group className="hidden lg:flex lg:gap-x-9">
           <Popover className="relative">
-            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              Categories
+            <Popover.Button className="focus:outline-none focus:bg-gray-100 px-2 py-1 rounded-lg flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-600">
+                Категории 
               <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
             </Popover.Button>
 
@@ -77,7 +73,7 @@ export default function Example() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              <Popover.Panel className="absolute -left-8 top-full z-20 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
                   {products.map((item) => (
                     <div
@@ -85,7 +81,7 @@ export default function Example() {
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                        <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                        <item.icon className="h-6 w-6 text-gray-600 group-hover:text-gray-900" aria-hidden="true" />
                       </div>
                       <div className="flex-auto">
                         <a href={item.href} className="block font-semibold text-gray-900">
@@ -99,48 +95,48 @@ export default function Example() {
                 </div>
                 <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
                   {callsToAction.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                     >
                       <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </Popover.Panel>
             </Transition>
           </Popover>
 
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
-          </a>
+          <Link to={"/apple"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+            Apple
+          </Link>
+          <Link to={"/samsung"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+            Samsung
+          </Link>
+          <Link to={"/other"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+            Другие
+          </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <Link to={"/signin"} className="text-lg px-3 py-2 rounded-lg font-semibold leading-6 text-gray-900">
+            Войти <span aria-hidden="true">&rarr;</span>
+          </Link>
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to={"/"} className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 className="h-10 w-auto"
                 src={Logo}
                 alt=""
               />
-            </a>
+            </Link>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -150,7 +146,7 @@ export default function Example() {
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-6 flow-root">
+          <div className="mt-6 flow-root ">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Disclosure as="div" className="-mx-3">
@@ -178,32 +174,28 @@ export default function Example() {
                     </>
                   )}
                 </Disclosure>
-                <a
-                  href="#"
+                <Link to={"/apple"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Features
-                </a>
-                <a
-                  href="#"
+                  Apple
+                </Link>
+                <Link to={"/samsung"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
-                </a>
-                <a
-                  href="#"
+                  Samsung
+                </Link>
+                <Link to={"/other"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
-                </a>
+                  Другие
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link to={"/"}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
