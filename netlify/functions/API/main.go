@@ -44,15 +44,16 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 }
 
 func scrapeBrostore(url string) (string, error) {
-	fmt.Println("URL: ", url)
 
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "brostore.uz/collections/" + url + "", nil)
+	req, err := http.NewRequest("GET", "https://brostore.uz/collections/" + url + "/", nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return "", err
 	}
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+
+	fmt.Println("GET: ", "https://brostore.uz/collections/" + url + "/")
 
 	// Perform the request
 	resp, err := client.Do(req)
