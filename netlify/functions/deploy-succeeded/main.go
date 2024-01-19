@@ -32,6 +32,7 @@ var products []Product
 var r = mux.NewRouter() // Initialize the router outside the handleRequests function
 
 func handleRequests() {
+	r.HandleFunc("/", home).Methods("GET")
 	r.HandleFunc("/api/products/", getAllProducts).Methods("GET")
 	r.HandleFunc("/api/product/{id}/", getProductDetail).Methods("GET")
 	r.HandleFunc("/api/parse/", parseURL).Methods("POST")
@@ -39,19 +40,18 @@ func handleRequests() {
 	c := cors.AllowAll()
 	http.Handle("/", c.Handler(r))
 
-	// Use the PORT environment variable assigned by Netlify
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080" // Default port if not specified
+		port = "8080"
 	}
 
 	fmt.Printf("Server listening on port %s\n", port)
-
-	// Start the server using the dynamic port from Netlify
 	http.ListenAndServe(":"+port, nil)
 }
 
-
+func home(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello, World!")
+}
 
 type Payload struct {
     Context string `json:"context"`
