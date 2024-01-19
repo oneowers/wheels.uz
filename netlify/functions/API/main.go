@@ -33,12 +33,22 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Body:       "Error scraping data",
+			Headers:    map[string]string{
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+				// Add other necessary CORS headers if needed
+			},
 		}, err
 	}
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       body,
+		Headers:    map[string]string{
+			"Content-Type": "application/json",
+			"Access-Control-Allow-Origin": "*",
+			// Add other necessary CORS headers if needed
+		},
 	}, nil
 }
 
