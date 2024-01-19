@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context"
+	// "context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -11,6 +11,11 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/rs/cors"
+
+	"regexp"
+	"errors"
+	"strconv"
+
 )
 
 type Product struct {
@@ -46,12 +51,18 @@ func handleRequests() {
 	http.ListenAndServe(":"+port, nil)
 }
 
-func parseURL(w http.ResponseWriter, r *http.Request) {
-	// Handle AWS Lambda Proxy Request
-	ctx := context.Background()
-	requestBody := RequestBody{}
+type Payload struct {
+    Context string `json:"context"`
+}
 
+type RequestBody struct {
+    Payload Payload `json:"payload"`
+}
+
+func parseURL(w http.ResponseWriter, r *http.Request) {
+	// Decode the URL directly from the request body
 	decoder := json.NewDecoder(r.Body)
+	var requestBody map[string]string
 	if err := decoder.Decode(&requestBody); err != nil {
 		http.Error(w, "Error decoding request body", http.StatusBadRequest)
 		return
@@ -60,11 +71,20 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 	// Reset the products slice before scraping new data
 	products = nil
 
-	// Print the URL from the request body
-	fmt.Println("[POST]: url: " + requestBody.Payload.Context)
+	// Print the entire request body for debugging purposes
+	fmt.Println("[POST]: Request Body:", requestBody)
+
+	// Extract the URL from the request body
+	url, exists := requestBody["context"]
+	if !exists {
+		http.Error(w, "URL not found in request body", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Println("[POST]: url:", url)
 
 	// Scrape data from the provided URL
-	scrapeBrostore(w, requestBody.Payload.Context)
+	scrapeBrostore(w, url)
 
 	// Return the parsed data as JSON
 	jsonData, err := json.Marshal(products)
@@ -74,6 +94,9 @@ func parseURL(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(jsonData)
 }
+
+
+
 
 func scrapeBrostore(w http.ResponseWriter, url string) {
 	// Set a user-agent to mimic a browser request
