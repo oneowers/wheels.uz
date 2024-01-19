@@ -11,12 +11,6 @@ github.com/aws/aws-lambda-go/lambda
 github.com/aws/aws-lambda-go/lambda/handlertrace
 github.com/aws/aws-lambda-go/lambda/messages
 github.com/aws/aws-lambda-go/lambdacontext
-# github.com/gorilla/mux v1.8.1
-## explicit; go 1.20
-github.com/gorilla/mux
-# github.com/rs/cors v1.10.1
-## explicit; go 1.13
-github.com/rs/cors
 # golang.org/x/net v0.20.0
 ## explicit; go 1.18
 golang.org/x/net/html
