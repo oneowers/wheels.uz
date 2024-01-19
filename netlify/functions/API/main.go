@@ -47,7 +47,7 @@ func scrapeBrostore(url string) (string, error) {
 	fmt.Println("URL: ", url)
 
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", "brostore.uz/collections/" + url + "", nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return "", err
