@@ -1,19 +1,19 @@
 package main
 
 import (
-    "context"
-    "encoding/json"
-    "fmt"
-    "net/http"
-    "strings"
+	"context"
+	"strings"
+	"encoding/json"
+	"fmt"
+	"net/http"
 
-    "github.com/aws/aws-lambda-go/events"
-    "github.com/aws/aws-lambda-go/lambda"
-    "github.com/aws/aws-lambda-go/lambdacontext"
-    "github.com/gorilla/mux"
-    "github.com/PuerkitoBio/goquery"  // Add this line
+	"github.com/PuerkitoBio/goquery"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambdacontext"
+	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
-
 
 type Product struct {
 	ID           int    `json:"id"`
@@ -26,13 +26,63 @@ type Product struct {
 }
 
 var products []Product
-
 var r = mux.NewRouter()
+
+func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	lc, ok := lambdacontext.FromContext(ctx)
+	if !ok {
+		return &events.APIGatewayProxyResponse{
+			StatusCode: 503,
+			Body:       "Something went wrong :(",
+		}, nil
+	}
+
+	cc := lc.ClientContext
+
+	// Вместо текста "Hello, " + cc.Client.AppTitle используйте ваш код обработки POST-запроса
+
+	// Пример: возврат JSON-ответа
+	response := map[string]interface{}{
+		"status":  "success",
+		"message": "Hello, " + cc.Client.AppTitle,
+	}
+
+	// Преобразование map в JSON
+	responseJSON, err := json.Marshal(response)
+	if err != nil {
+		return &events.APIGatewayProxyResponse{
+			StatusCode: 500,
+			Body:       "Error encoding JSON response",
+		}, nil
+	}
+
+	// Возврат JSON-ответа
+	return &events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Body:       string(responseJSON),
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+		},
+	}, nil
+}
 
 func handleRequests() {
 	r.HandleFunc("/", home).Methods("GET")
 	r.HandleFunc("/api/parse/", parseURL).Methods("POST")
+
+	// Enable CORS middleware
+	c := cors.AllowAll()
+
+	// Wrap the existing router with CORS middleware
+	http.Handle("/", c.Handler(r))
+
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		fmt.Println("Error starting server:", err)
+	}
+	
 }
+
 
 func home(w http.ResponseWriter, r *http.Request) {
 	text := "I AM LEGand"
@@ -40,32 +90,38 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func parseURL(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
 
-	var requestBody struct {
-		URL string `json:"url"`
-	}
+    var requestBody struct {
+        URL string `json:"url"`
+    }
 
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&requestBody); err != nil {
-		http.Error(w, "Error decoding request body", http.StatusBadRequest)
-		return
-	}
+    decoder := json.NewDecoder(r.Body)
+    if err := decoder.Decode(&requestBody); err != nil {
+        http.Error(w, "Error decoding request body", http.StatusBadRequest)
+        return
+    }
 
-	products = nil
-	fmt.Println("[POST]: url: " + requestBody.URL)
+    // Reset the products slice before scraping new data
+    products = nil
 
-	scrapeBrostore(w, requestBody.URL)
+    // Print the URL from the request body
+    fmt.Println("[POST]: url: " + requestBody.URL)
 
-	jsonData, err := json.Marshal(products)
-	if err != nil {
-		http.Error(w, "Error converting to JSON", http.StatusInternalServerError)
-		return
-	}
-	w.Write(jsonData)
+    // Scrape data from the provided URL
+    scrapeBrostore(w, requestBody.URL)
+
+    // Return the parsed data as JSON
+    jsonData, err := json.Marshal(products)
+    if err != nil {
+        http.Error(w, "Error converting to JSON", http.StatusInternalServerError)
+        return
+    }
+    w.Write(jsonData)
 }
 
 func scrapeBrostore(w http.ResponseWriter, url string) {
+	// Set a user-agent to mimic a browser request
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -74,6 +130,7 @@ func scrapeBrostore(w http.ResponseWriter, url string) {
 	}
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
 
+	// Perform the request
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("Error making request:", err)
@@ -81,33 +138,42 @@ func scrapeBrostore(w http.ResponseWriter, url string) {
 	}
 	defer resp.Body.Close()
 
+	// Check if the request was successful (status code 200)
 	if resp.StatusCode != http.StatusOK {
 		fmt.Printf("Failed to retrieve data. Status Code: %d\n", resp.StatusCode)
 		return
 	}
 
+	// Use goquery to parse the HTML response
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		fmt.Println("Error parsing HTML:", err)
 		return
 	}
 
+	// Find all product-card elements
 	doc.Find(".product-card.text-center.product-card--content-spacing-false.product-card--border-false.has-shadow--false").Each(func(i int, s *goquery.Selection) {
+		// Extract information from each product-card
 		title := strings.TrimSpace(s.Find(".product-card-title").Text())
 		price := strings.TrimSpace(s.Find(".amount").Text())
 		imageURL, _ := s.Find(".product-primary-image").Attr("data-srcset")
 		imageURL = "https:" + strings.Fields(imageURL)[0]
 
 		imageURL1, _ := s.Find(".product-secondary-image").Attr("data-srcset")
-		imageURL1 = "https:" + strings.Fields(imageURL1)[0]
+		imageURL1 = "https:" + strings.Fields(imageURL1)[0]  // Fix this line
 
+		// Find the parent container that contains the link
 		parent := s.Find(".product-card-title").Parent()
+
+		// Find the link within the parent container
 		linkSelection := parent.Find("a").First()
 		link, exists := linkSelection.Attr("href")
 
+		// Check if the link exists
 		if exists {
 			link = "https://brostore.uz" + link
 
+			// Save information to the products slice
 			product := Product{
 				ID:    i + 1,
 				Title: title,
@@ -121,28 +187,15 @@ func scrapeBrostore(w http.ResponseWriter, url string) {
 			fmt.Println("Link does not exist")
 		}
 	})
-}
 
-// AWS Lambda handler
-func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	lc, ok := lambdacontext.FromContext(ctx)
-	if !ok {
-		return &events.APIGatewayProxyResponse{
-			StatusCode: 503,
-			Body:       "Something went wrong :(",
-		}, nil
-	}
-
-	cc := lc.ClientContext
-
-	return &events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Body:       product,
-	}, nil
 }
 
 func main() {
-	products = make([]Product, 0)
+	// Точка входа для локального запуска сервера
 	handleRequests()
-	lambda.Start(Handler)
+}
+
+func lambdaMain() {
+	// Точка входа для AWS Lambda
+	lambda.Start(handler)
 }
