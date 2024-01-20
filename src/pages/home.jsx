@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './header.jsx';
-import Footer from './footer.jsx';
 import ProductGrid from './components/product_grid.jsx';
 import FAQSection from './components/fAQSection.jsx';
 import Description from './components/description.jsx';
@@ -8,7 +6,6 @@ import Description from './components/description.jsx';
 const App = ({ api }) => {
   return (
     <>
-      <Header />
       <section
         aria-labelledby="sale-heading"
         className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pt-8 text-center sm:px-6 lg:px-8"
@@ -35,7 +32,6 @@ const App = ({ api }) => {
 
       <Description />
       <FAQSection />
-      <Footer />
     </>
   );
 };

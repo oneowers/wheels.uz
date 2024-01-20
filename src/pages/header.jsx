@@ -16,12 +16,12 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import Logo from './himarket.png'
 
 const products = [
-    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '/laptops/', icon: ComputerDesktopIcon },
-    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '/desktop/', icon: CubeIcon },
-    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '/mobile/', icon: DevicePhoneMobileIcon },
-    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '/tablets/', icon: DeviceTabletIcon },
-    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '/headphones/', icon: MusicalNoteIcon },
-    { name: 'Умные часы', description: 'Интеллектуальные часы с уникальными функциональными возможностями', href: '/watches/', icon: ClockIcon },
+    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '/laptops', icon: ComputerDesktopIcon },
+    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '/desktop', icon: CubeIcon },
+    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '/mobile', icon: DevicePhoneMobileIcon },
+    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '/tablets', icon: DeviceTabletIcon },
+    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '/headphones', icon: MusicalNoteIcon },
+    { name: 'Умные часы', description: 'Интеллектуальные часы с уникальными функциональными возможностями', href: '/watches', icon: ClockIcon },
   ];
   
   

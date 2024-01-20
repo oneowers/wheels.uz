@@ -10,11 +10,14 @@ import ProductList from './pages/productList.jsx';
 import SignIn from './pages/signIn.jsx';
 import FortuneWheel from './pages/fortuneWheel.jsx';
 import View from './pages/view.jsx';
+import Header from './pages/header.jsx';
+import Footer from './pages/footer.jsx';
 
 export default function App() {
   return (
     <>
     
+    <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" index element={<View />} />
@@ -31,6 +34,7 @@ export default function App() {
         <Route path="/other" element={<Other />} />
         
       </Routes>
+        <Footer />
     </>
   );
 }
