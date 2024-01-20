@@ -25,10 +25,10 @@ const App = ({ api }) => {
           </a>
         </div>
       </section>
-      <ProductGrid productsCount={4} api={"iphone"}  link="/mobile" name="iPhone" />
-      <ProductGrid productsCount={4} api={"noutbuki"}  link="/laptops" name="MacBook" />
-      <ProductGrid productsCount={4} api={"ipad-series"}  link="/tablets" name="iPad" />
-      <ProductGrid productsCount={4} api={"monobloki"}  link="/desktop" name="iMac" />
+      <ProductGrid productsCount={4} api={"iphone"}  link="/mobile/" name="iPhone" />
+      <ProductGrid productsCount={4} api={"noutbuki"}  link="/laptops/" name="MacBook" />
+      <ProductGrid productsCount={4} api={"ipad-series"}  link="/tablets/" name="iPad" />
+      <ProductGrid productsCount={4} api={"monobloki"}  link="/desktop/" name="iMac" />
 
       <Description />
       <FAQSection />

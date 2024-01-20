@@ -5,9 +5,9 @@ import './index.css';
 import './App.css';
 
 import HomePage from './pages/home.jsx';
-import Other from './pages/other.jsx';
+import Other from './pages/other/.jsx';
 import ProductList from './pages/productList.jsx';
-import SignIn from './pages/signIn.jsx';
+import SignIn from './pages/signin/.jsx';
 import FortuneWheel from './pages/fortuneWheel.jsx';
 import View from './pages/view.jsx';
 import Header from './pages/header.jsx';
@@ -21,17 +21,17 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" index element={<View />} />
-        <Route path="/discounts" element={<FortuneWheel />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/apple" element={<ProductList productsCount={100} api="apple" />} />
-        <Route path="/xiaomi" element={<ProductList productsCount={100} api="xiaomi" />} />
-        <Route path="/samsung" element={<ProductList productsCount={100} api="smartfony-samsung" />} />
-        <Route path="/desktop" element={<ProductList productsCount={100} api="monobloki" />} />
-        <Route path="/laptops" element={<ProductList productsCount={100} api="noutbuki" />} />
-        <Route path="/mobile" element={<ProductList productsCount={100} api="iphone" />} />
-        <Route path="/tablets" element={<ProductList productsCount={100} api="ipad-series" />} />
-        <Route path="/headphones" element={<ProductList productsCount={100} api="besprovodnye-naushniki-apple" />} />
-        <Route path="/other" element={<Other />} />
+        <Route path="/discounts/" element={<FortuneWheel />} />
+        <Route path="/signin/" element={<SignIn />} />
+        <Route path="/apple/" element={<ProductList productsCount={100} api="apple" />} />
+        <Route path="/xiaomi/" element={<ProductList productsCount={100} api="xiaomi" />} />
+        <Route path="/samsung/" element={<ProductList productsCount={100} api="smartfony-samsung" />} />
+        <Route path="/desktop/" element={<ProductList productsCount={100} api="monobloki" />} />
+        <Route path="/laptops/" element={<ProductList productsCount={100} api="noutbuki" />} />
+        <Route path="/mobile/" element={<ProductList productsCount={100} api="iphone" />} />
+        <Route path="/tablets/" element={<ProductList productsCount={100} api="ipad-series" />} />
+        <Route path="/headphones/" element={<ProductList productsCount={100} api="besprovodnye-naushniki-apple" />} />
+        <Route path="/other/" element={<Other />} />
         
       </Routes>
         <Footer />

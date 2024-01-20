@@ -16,11 +16,11 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import Logo from './himarket.png'
 
 const products = [
-    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '/laptops', icon: ComputerDesktopIcon },
-    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '/desktop', icon: CubeIcon },
-    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '/mobile', icon: DevicePhoneMobileIcon },
-    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '/tablets', icon: DeviceTabletIcon },
-    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '/headphones', icon: MusicalNoteIcon },
+    { name: 'Ноутбуки', description: 'Мощные ноутбуки для работы и отдыха', href: '/laptops/', icon: ComputerDesktopIcon },
+    { name: 'Моноблоки', description: 'Стильные моноблоки для удобства использования', href: '/desktop/', icon: CubeIcon },
+    { name: 'Смартфоны', description: 'Инновационные смартфоны с высокой производительностью', href: '/mobile/', icon: DevicePhoneMobileIcon },
+    { name: 'Планшеты', description: 'Портативные планшеты для подключения к приложениям', href: '/tablets/', icon: DeviceTabletIcon },
+    { name: 'Наушники', description: 'Высококачественные наушники для музыки и комфортного использования', href: '/headphones/', icon: MusicalNoteIcon },
     { name: 'Умные часы', description: 'Интеллектуальные часы с уникальными функциональными возможностями', href: '/watches', icon: ClockIcon },
   ];
   
@@ -109,18 +109,18 @@ export default function Example() {
             </Transition>
           </Popover>
 
-          <Link to={"/apple"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+          <Link to={"/apple/"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
             Apple
           </Link>
-          <Link to={"/samsung"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+          <Link to={"/samsung/"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
             Samsung
           </Link>
-          <Link to={"/other"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
+          <Link to={"/other/"} className="text-sm font-semibold leading-6 px-2 py-1 text-gray-600">
             Другие
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to={"/signin"} className="text-lg px-3 py-2 rounded-lg font-semibold leading-6 text-gray-900">
+          <Link to={"/signin/"} className="text-lg px-3 py-2 rounded-lg font-semibold leading-6 text-gray-900">
             Войти <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
@@ -174,17 +174,17 @@ export default function Example() {
                     </>
                   )}
                 </Disclosure>
-                <Link to={"/apple"}
+                <Link to={"/apple/"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Apple
                 </Link>
-                <Link to={"/samsung"}
+                <Link to={"/samsung/"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Samsung
                 </Link>
-                <Link to={"/other"}
+                <Link to={"/other/"}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Другие
