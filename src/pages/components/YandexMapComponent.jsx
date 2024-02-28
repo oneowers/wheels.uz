@@ -32,7 +32,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
       try {
         if (location && location.latitude && location.longitude) {
           const response = await fetch(
-            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=8517410f-40c6-4c76-bd00-b686bbc252db&geocode=${location.longitude},${location.latitude}`
+            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=128517410f-40c6-4c76-bd00-b686bbc252db&geocode=${location.longitude},${location.latitude}`
           );
 
           const data = await response.json();
