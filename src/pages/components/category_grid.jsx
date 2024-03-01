@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductCart from './product_cart.jsx';
+import CategoryCart from './categorycart.jsx';
 import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
@@ -50,7 +50,7 @@ return (
             <div id="content-container" className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {data ? data.map((item, index) => (
                 <>
-                    <ProductCart item={item}/>
+                    <CategoryCart item={item}/>
                 </>
               )):
                 [0 ,1, 2, 3, 4, 5, 6, 7].map(() => (
