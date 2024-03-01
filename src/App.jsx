@@ -20,9 +20,8 @@ export default function App() {
     
     
       <Routes>
-        <Route path="/" element={[<Header />, <HomePage />, <Footer />]} />
-        <Route path="/product/:id" index element={[<Header />, <View />, <Footer />]} />
-        <Route path="/discounts/" element={[<Header />, <FortuneWheel />, <Footer />]} />
+        <Route path="/" element={[<Header />, <ProductList />, <Footer />]} />
+        <Route path="/wheels/:id" index element={[<Header />, <HomePage />, <Footer />]} />
         <Route path="/signin/" element={[<Header />, <SignIn />, <Footer />]} />
         <Route path="/orders/" element={[<Orders />]}/>
       </Routes>

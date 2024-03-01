@@ -1,0 +1,13 @@
+@keyframes moveRoad {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-road {
+    animation: moveRoad 2s linear infinite;
+  }
+  

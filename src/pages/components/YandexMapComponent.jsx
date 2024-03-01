@@ -42,10 +42,11 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
 
           if (featureMember) {
             const foundAddress =
-              featureMember.GeoObject.metaDataProperty.GeocoderMetaData.text;
-            const parts = foundAddress.split(",");
+            featureMember.GeoObject.metaDataProperty.GeocoderMetaData.text;
+            const parts = foundAddress.split(',');
             const formattedParts = parts.map((part) => part.trim());
-            setAddress(formattedParts);
+            const formattedAddress = formattedParts.join(', '); // Convert array to string
+            setAddress(formattedAddress);
             setAddressParent(formattedParts);
           }
         }
@@ -60,7 +61,6 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
 
   return (
     <div>
-      {address}
       {location ? (
         <YMaps>
           <Map

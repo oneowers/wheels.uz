@@ -1,10 +1,10 @@
 
-import ProductGrid from './components/product_grid.jsx';
+import CategoryList from './components/category_grid.jsx';
 
 const App = ({ api, productsCount }) => {
   return (
     <>
-        <ProductGrid productsCount={productsCount} api={api}/>
+        <CategoryList productsCount={productsCount} api={api}/>
     </>
   );
 };

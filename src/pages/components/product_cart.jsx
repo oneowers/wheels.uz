@@ -1,97 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import ProductModal from './ProductModal.jsx'; // Уточните путь к вашему файлу с модальным окном
-
-
-const convertStringToNumber = (inputString) => {
-    // Убираем пробелы и "сум" из строки
-    const cleanedString = inputString.replace(/\s+/g, '').replace('сум', '');
-  
-    // Преобразуем строку в число
-    const result = parseInt(cleanedString, 10);
-  
-    // Возвращаем результат
-    return result;
-  };
-
-const convertNumberToString = (inputNumber) => {
-  // Преобразуем число в строку и добавляем пробелы каждые три цифры с конца
-  const formattedString = inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-
-  // Добавляем " сум" к отформатированной строке
-  const resultString = `${formattedString} сум`;
-
-  // Возвращаем результат
-  return resultString;
-};
-
-const formatNumber = (number) => {
-  // Round down to the nearest thousand
-  const roundedNumber = Math.floor(number / 1000) * 1000;
-
-  // Format the number to have exactly two decimal places
-  const formattedNumber = roundedNumber.toFixed(2);
-
-  return parseFloat(formattedNumber).toLocaleString();
-};
-  
-  
+import React from 'react';
+import './ProductItem.css';
 
 const ProductItem = ({ item }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-
   return (
-    <>
-    <li key={item.id}
-      className="flex py-6 sm:py-10 relative"
-      onClick={() => setIsModalOpen(true)}
-      >
-      <div className="flex-shrink-0">
-        {item.images[0].image != null ? (
-          <img
-            src={item.images[0].image}
-            alt={item.images[0].image}
-            className="h-20 rounded-lg object-cover object-center sm:h-32 sm:w-32"
-          />):
-          (
-            <div
-              className="h-24 rounded-lg animate-pulse bg-gray-300 sm:h-32 sm:w-32"
-            ></div>)
-        } 
+    <li key={item.id} className="relative flex sm:py-10 items-center justify-center overflow-hidden">
+      <div className="absolute z-10 w-full h-full flex items-center justify-center animate-road">
+        <span className="text-black text-7xl font-bold">{item.name}</span>
       </div>
-
-      <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-        <div>
-          <div className="flex justify-between sm:grid sm:grid-cols-2">
-            <div className="pr-6">
-              <h3 className="text-sm">
-                <p className="font-medium text-gray-700 hover:text-gray-800">
-                  {item.name}
-                </p>
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">Тип: {item.climate}</p>
-              {item.details[0].size ? <p className="mt-1 text-sm text-gray-500">Размер: {item.details[0].size}</p> : null}
-            </div>
-
-            <div className=''>
-              <p className="text-right text-sm font-medium text-gray-900">{formatNumber(item.details[0].month_3_price)} sum</p>
-              <p className="text-right text-sm font-medium text-gray-900">{formatNumber(item.details[0].month_6_price)} sum</p>
-            </div>
-          </div> 
-        </div>
-      </div>
-    </li>
-     
-    {isModalOpen && (
-      <ProductModal
-        item={item}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+      
+      <img
+        src={item.image}
+        alt={item.image}
+        className="h-22 w-60 rounded-lg object-cover object-center relative z-10"
       />
-    )}
-      </>
+    </li>
   );
 };
 

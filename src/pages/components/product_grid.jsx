@@ -13,7 +13,7 @@ const ProductItem = ({ productsCount, api , link, name}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://linkbuy.uz/api/wheels/", {
+        const response = await fetch("https://corsproxy.io/?http://linkbuy.uz/api/wheels/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
