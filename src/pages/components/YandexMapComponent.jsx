@@ -32,21 +32,20 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
       try {
         if (location && location.latitude && location.longitude) {
           const response = await fetch(
-            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=128517410f-40c6-4c76-bd00-b686bbc252db&geocode=${location.longitude},${location.latitude}`
+            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=8517410f-40c6-4c76-bd00-b686bbc252db&geocode=${location.longitude},${location.latitude}`
           );
-
+  
           const data = await response.json();
-
+  
           const featureMember =
             data.response.GeoObjectCollection.featureMember[0];
-
+  
           if (featureMember) {
             const foundAddress =
-            featureMember.GeoObject.metaDataProperty.GeocoderMetaData.text;
-            const parts = foundAddress.split(',');
+              featureMember.GeoObject.metaDataProperty.GeocoderMetaData.text;
+            const parts = foundAddress.split(",");
             const formattedParts = parts.map((part) => part.trim());
-            const formattedAddress = formattedParts.join(', '); // Convert array to string
-            setAddress(formattedAddress);
+            setAddress(formattedParts);
             setAddressParent(formattedParts);
           }
         }
@@ -54,10 +53,11 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
         console.error("Error fetching address:", error);
       }
     };
-
+  
     // Fetch the address only on component mount
     fetchAddress();
-  }, []);
+  }, [location]); // Include dependencies if needed
+  
 
   return (
     <div>

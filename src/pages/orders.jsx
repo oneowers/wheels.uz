@@ -4,6 +4,10 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import YandexMapComponent from "./components/YandexMapComponent.jsx";
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import ProductGrid from './components/product_grid.jsx';
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -49,18 +53,45 @@ async function createOrder(orderData) {
   }
 }
 export default function Example() {
+  const { id: wheelId } = useParams();
+  const { plan: planId } = useParams();
+  const [data, setData] = useState();
+
+
   const [location, setLocation] = useState({});
   const [address, setAddress] = useState("");
   const [orderData, setOrderData] = useState({
     passportImage: null,
-    fullName: "John Doe",
+    fullName: "",
     phoneNumber: "+998",
     longitude: location.longitude,
     latitude: location.latitude,
     address: address,
     quantity: 1,
-    detailsId: 1,
+    detailsId: wheelId,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://linkbuy.uz/api/wheels/${wheelId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const jsonData = await response.json();
+        setData(jsonData);
+        console.log(jsonData)
+        console.log(planId)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -99,6 +130,46 @@ export default function Example() {
 
       <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
         <section aria-labelledby="options-heading" className="mt-5">
+          {data != null && (
+        <li key={data.id}
+          className="flex py-6 sm:py-10 relative"
+          >
+          <div className="flex-shrink-0">
+            {data.images[0].image != null ? (
+              <img
+                src={data.images[0].image}
+                alt={data.images[0].image}
+                className="h-20 rounded-lg object-cover object-center sm:h-32 sm:w-32"
+              />):
+              (
+                <div
+                  className="h-24 rounded-lg animate-pulse bg-gray-300 sm:h-32 sm:w-32"
+                ></div>)
+            } 
+          </div>
+
+          <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
+            <div>
+              <div className="flex justify-between sm:grid sm:grid-cols-2">
+                <div className="pr-6">
+                  <h3 className="text-sm">
+                    <p className="font-medium text-gray-700 hover:text-gray-800">
+                      {data.name}
+                    </p>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Тип: {data.climate}</p>
+                  {data.details[0].size ? <p className="mt-1 text-sm text-gray-500">Размер: {data.details[0].size}</p> : null}
+                </div>
+
+                <div className=''>
+                  <p className="text-right text-sm font-medium text-gray-900">{formatNumber(planId == 0 ? data.details[0].month_3_price : data.details[0].month_6_price)} sum</p>
+                  <p className="text-right text-sm font-medium text-gray-900">{planId == 0 ? "Рассрочка на 3 месяца" : "Рассрочка на 6 месяца"}</p>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </li>)}
+    
           <div className=" rounded-lg w-full">
             <YandexMapComponent
               setLocationParent={setLocation}

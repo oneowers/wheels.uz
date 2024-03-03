@@ -9,7 +9,7 @@ const App = ({ api }) => {
 
   return (
     <>
-      <ProductGrid productsCount={4} api={`https://corsproxy.io/?http://linkbuy.uz/api/wheels/?category_id=${params}`} params={useParams()} link="/wheels/" name="Wheels" />
+      <ProductGrid productsCount={4} api={`http://linkbuy.uz/api/wheels/?category_id=${params}`} params={useParams()} link="/wheels/" name="Wheels" />
       {/* <Description />
       <FAQSection /> */}
     </>

@@ -24,8 +24,8 @@ function classNames(...classes) {
 }
 
 const plans = [
-  { name: 'Hobby', ram: '8GB', cpus: '4 CPUs', disk: '160 GB SSD disk', price: '$40' },
-  { name: 'Startup', ram: '12GB', cpus: '6 CPUs', disk: '256 GB SSD disk', price: '$80' },
+  { id: 0,  name: 'Hobby', ram: '8GB', cpus: '4 CPUs', disk: '160 GB SSD disk', price: '$40' },
+  { id: 1, name: 'Startup', ram: '12GB', cpus: '6 CPUs', disk: '256 GB SSD disk', price: '$80' },
 ]
 
 const formatNumber = (number) => {
@@ -39,11 +39,12 @@ const formatNumber = (number) => {
 };
 
 export default function Example({ item, isOpen, onClose }) {
-  const [open, setOpen] = useState(false);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const [selected, setSelected] = useState(plans[0])
-  const [selectedMemory, setSelectedMemory] = useState(product.memory[2]);
   const [isModalOpen1, setIsModalOpen1] = useState(false);
+
+  plans[0] = { id: 0, name: 'Рассрочка на 3 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_3_price)} сум` }
+  plans[1] = { id: 1, name: 'Рассрочка на 6 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_6_price)} сум` }
+
 
   product.name = item.title;
   product.price = item.price;
@@ -108,17 +109,25 @@ export default function Example({ item, isOpen, onClose }) {
                             Product information
                           </h3>
                           <div className="my-1">
-                            <div className="grid grid-cols-4 gap-4">
-                              {product.memory.map((size) => (
-                                <>
-                                  <p
-                                    as="span"
-                                    className="text-sm border border-gray-300 bg-gray-50 rounded-md p-2"
-                                  >
-                                    {size.name}
-                                  </p>
-                                </>
-                              ))}
+                            <div className="grid grid-cols-3 gap-4">
+                            <p
+                                as="span"
+                                className="text-sm border border-gray-300 bg-gray-50 rounded-md p-2"
+                              >
+                                {item.details[0].size} размер
+                              </p>
+                              <p
+                                as="span"
+                                className="text-sm border border-gray-300 bg-gray-50 rounded-md p-2"
+                              >
+                                {item.details[0].width} см
+                              </p>
+                              <p
+                                as="span"
+                                className="text-sm border border-gray-300 bg-gray-50 rounded-md p-2"
+                              >
+                                {item.details[0].lenght} см
+                              </p>
                             </div>
                           </div>
 
@@ -223,7 +232,7 @@ export default function Example({ item, isOpen, onClose }) {
                                               {plan.price}
                                             </span>
                                             <span className="ml-1 text-gray-500 ml-0">
-                                              /mo
+                                              /месяц
                                             </span>
                                           </RadioGroup.Description>
                                           <span
@@ -242,6 +251,14 @@ export default function Example({ item, isOpen, onClose }) {
                                   ))}
                                 </div>
                               </RadioGroup>
+                              <div className="mt-4 w-full rounded-t-lg flex justify-between">
+                              <Link to="/" className="bg-gray-200 hover:bg-gray-200/90 text-gray-800 py-2 px-4 rounded">
+                                Отменить
+                              </Link>
+                              <Link to={`/order/${item.id}/${selected.id}`} className="bg-gray-800 hover:bg-gray-800/90 text-white py-2 px-4 rounded">
+                                Подтвердить заказ
+                                </Link>
+                            </div>
                             </div>
                           </form>
                         </section>
@@ -250,14 +267,7 @@ export default function Example({ item, isOpen, onClose }) {
                   </div>
                   
 
-                  <div className="fixed bottom-0 left-0 w-full rounded-t-lg p-4 flex justify-between">
-                    <Link to="/" className="bg-gray-200 hover:bg-gray-200/90 text-gray-800 py-2 px-4 rounded">
-                      Отменить
-                    </Link>
-                    <button className="bg-gray-800 hover:bg-gray-800/90 text-white py-2 px-4 rounded">
-                      Подтвердить заказ
-                    </button>
-                  </div>
+                  
 
                 </Dialog.Panel>
               </Transition.Child>
