@@ -47,7 +47,7 @@ return (
             </div>
             </div>
             )}
-            <div id="content-container" className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            <div id="content-container" className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:gap-x-8">
               {data ? data.map((item, index) => (
                 <>
                     <CategoryCart item={item}/>
