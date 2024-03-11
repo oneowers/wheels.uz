@@ -60,7 +60,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
   
 
   return (
-    <div>
+    <div className="lg:flex">
       {location ? (
         <YMaps>
           <Map
@@ -70,6 +70,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
             }}
             width="100%"
             height="200px"
+            className="lg:mr-5"
           >
             <Placemark geometry={[location.latitude, location.longitude]} />
           </Map>
@@ -78,7 +79,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
         <p>Getting geolocation...</p>
       )}
 
-      <div className="grid max-w-2xl gap-x-6 gap-y-4 mt-4 grid-cols-2">
+      <div className="grid gap-x-6 gap-y-4 mt-4 grid-cols-2 w-full">
         <div className="">
           <label
             htmlFor="city"

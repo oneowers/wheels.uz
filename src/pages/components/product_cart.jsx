@@ -41,11 +41,12 @@ const ProductItem = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   return (
     <>
     <li key={item.id}
-      className="flex py-6 sm:py-10 relative"
+      className="flex py-5 sm:py-10 relative 
+      sm:border-none border-b
+      "
       onClick={() => setIsModalOpen(true)}
       >
       <div className="flex-shrink-0">
@@ -53,7 +54,7 @@ const ProductItem = ({ item }) => {
           <img
             src={item.images[0].image}
             alt={item.images[0].image}
-            className="h-20 rounded-lg object-cover object-center sm:h-32 sm:w-32"
+            className="h-16 rounded-lg object-cover object-center sm:h-20 sm:w-20"
           />):
           (
             <div
@@ -66,18 +67,17 @@ const ProductItem = ({ item }) => {
         <div>
           <div className="flex justify-between sm:grid sm:grid-cols-2">
             <div className="pr-6">
-              <h3 className="text-sm">
-                <p className="font-medium text-gray-700 hover:text-gray-800">
+              <h3 className="text-sm font-bold">
+                <p className=" text-xs  text-gray-700 hover:text-gray-800">
                   {item.name}
                 </p>
               </h3>
-              <p className="mt-1 text-sm text-gray-500">Тип: {item.climate}</p>
-              {item.details[0].size ? <p className="mt-1 text-sm text-gray-500">Размер: {item.details[0].size}</p> : null}
+              <p className="mt-1 text-xs text-gray-500">Тип: {item.climate}</p>
+              {item.details[0].size ? <p className="mt-1 text-xs text-gray-500">Размер: {item.details[0].size}</p> : null}
             </div>
 
             <div className=''>
-              <p className="text-right text-sm font-medium text-gray-900">{formatNumber(item.details[0].month_3_price)} sum</p>
-              <p className="text-right text-sm font-medium text-gray-900">{formatNumber(item.details[0].month_6_price)} sum</p>
+              <p className="text-right text-xs font-medium text-gray-900">от {formatNumber(item.details[0].month_3_price)} сум</p>
             </div>
           </div> 
         </div>

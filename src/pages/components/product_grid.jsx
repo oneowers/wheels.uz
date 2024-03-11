@@ -40,7 +40,7 @@ const ProductItem = ({ productsCount, api, link, name }) => {
                   <div className="flex justify-between space-x-4 items-center">
                     <h2
                       className={classNames(
-                        "text-3xl font-medium text-gray-900"
+                        "text-xl font-medium text-gray-900"
                       )}
                     >
                       Шины для {data[0].category.name}
@@ -60,7 +60,7 @@ const ProductItem = ({ productsCount, api, link, name }) => {
                 </div>
                 <div
                   id="content-container"
-                  className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+                  className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8"
                 >
                   {data &&
                     data.map(
