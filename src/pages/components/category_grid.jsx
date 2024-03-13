@@ -13,7 +13,7 @@ const ProductItem = ({ productsCount, api , link, name}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://linkbuy.uz/api/categories/", {
+        const response = await fetch("https://linkbuy.uz/api/categories/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
