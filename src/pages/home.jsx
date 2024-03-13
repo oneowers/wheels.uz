@@ -9,7 +9,7 @@ const App = ({ api }) => {
 
   return (
     <>
-      <ProductGrid productsCount={10} api={`http://linkbuy.uz/api/wheels/?category_id=${params}`} params={useParams()} link="/wheels/" name="Wheels" />
+      <ProductGrid productsCount={10} api={`https://linkbuy.uz/api/wheels/?category_id=${params}`} params={useParams()} link="/wheels/" name="Wheels" />
       {/* <Description />
       <FAQSection /> */}
     </>
