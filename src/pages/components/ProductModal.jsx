@@ -91,8 +91,8 @@ export default function Example({ item, isOpen, onClose }) {
                     <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                       <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-white sm:col-span-4 lg:col-span-5">
                         <img
-                          src={item.images[0].image}
-                          alt={item.images[0].image}
+                          src={item.image}
+                          alt={item.image}
                           className="w-full h-full object-cover object-center"
                         />
                       </div>

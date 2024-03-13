@@ -77,7 +77,7 @@ export default function Example() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://linkbuy.uz/api/wheels/${wheelId}`,
+          `https://linkbuy.uz/api/wheels/${wheelId}`,
           {
             method: "GET",
             headers: {
@@ -156,12 +156,13 @@ export default function Example() {
   const handleFinishButtonClick = () => {
     if (validateForm()) {
       // Only open the modal if the form is valid
+      handleSubmit()
       setModalOpen(true);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
 
     if (validateForm()) {
       try {
@@ -200,7 +201,7 @@ export default function Example() {
                 setAddressParent={setAddress}
               />
             </div>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="sm:col-span-3 mt-2">
                 <label
                   htmlFor="first-name"
@@ -264,10 +265,10 @@ export default function Example() {
               {data != null && (
                 <li key={data.id} className="flex py-6 sm:py-10 relative">
                   <div className="flex-shrink-0">
-                    {data.images[0].image != null ? (
+                    {data.image != null ? (
                       <img
-                        src={data.images[0].image}
-                        alt={data.images[0].image}
+                        src={data.image}
+                        alt={data.image}
                         className="h-16 rounded-lg object-cover object-center "
                       />
                     ) : (

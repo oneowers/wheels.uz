@@ -85,7 +85,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
             htmlFor="city"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Город
+            Республика
           </label>
           <div className="mt-2">
             <input
@@ -118,7 +118,7 @@ const YandexMapComponent = ({ setLocationParent, setAddressParent }) => {
             htmlFor="region"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Район
+            Город
           </label>
           <div className="mt-2">
             <input
