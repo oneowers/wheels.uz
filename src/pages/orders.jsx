@@ -33,7 +33,7 @@ async function createOrder(orderData) {
     formData.append("quantity", orderData.quantity);
     formData.append("details", orderData.detailsId);
 
-    const response = await fetch("http://linkbuy.uz/api/create_order/", {
+    const response = await fetch("https://linkbuy.uz/api/create_order/", {
       method: "POST",
       body: formData,
     });
