@@ -50,10 +50,10 @@ const ProductItem = ({ item }) => {
       onClick={() => setIsModalOpen(true)}
       >
       <div className="flex-shrink-0">
-        {item.images[0].image != null ? (
+        {item.image != null ? (
           <img
-            src={item.images[0].image}
-            alt={item.images[0].image}
+            src={item.image}
+            alt={item.image}
             className="h-16 rounded-lg object-cover object-center sm:h-20 sm:w-20"
           />):
           (

@@ -34,7 +34,7 @@ const ProductItem = ({ productsCount, api, link, name }) => {
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4  sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
           {data ? (
-            data.length > 0 ? (
+            data.count > 0 ? (
               <>
                 <div className="pt-7 pb-5 sm:pt-7">
                   <div className="flex justify-between space-x-4 items-center">
@@ -43,7 +43,7 @@ const ProductItem = ({ productsCount, api, link, name }) => {
                         "text-xl font-medium text-gray-900"
                       )}
                     >
-                      Шины для {data[0].category.name}
+                      Шины для {data.results[0].category.name}
                     </h2>
                     {link && (
                       <Link
@@ -62,11 +62,11 @@ const ProductItem = ({ productsCount, api, link, name }) => {
                   id="content-container"
                   className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8"
                 >
-                  {data &&
-                    data.map(
+                  {data.results.map(
                       (item, index) =>
                         index < productsCount && (
                           <>
+                            {console.log(item)}
                             <ProductCart item={item} />
                           </>
                         )
