@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ProductGrid from './components/product_grid.jsx';
-import FAQSection from './components/fAQSection.jsx';
-import Description from './components/description.jsx';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const App = ({ api }) => {
-  const { id: params } = useParams();
+const Home = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const page = parseInt(params.get('page'), 10); // Parse string to integer
+  const category = parseInt(params.get('category'), 10); // Parse string to integer
+  
+  console.log(`page: ${page}`);
+  console.log(`category: ${category}`);
 
   return (
     <>
-      <ProductGrid productsCount={10} api={`https://linkbuy.uz/api/wheels/?category_id=${params}`} params={useParams()} link="/wheels/" name="Wheels" />
-      {/* <Description />
-      <FAQSection /> */}
+      <ProductGrid productsCount={10} page={page} categoryId={category} link="/wheels/" name="Wheels" />
     </>
   );
 };
 
-export default App;
+export default Home;

@@ -77,7 +77,7 @@ const ProductItem = ({ item }) => {
             </div>
 
             <div className=''>
-              <p className="text-right text-xs font-medium text-gray-900">от {formatNumber(item.details[0].month_3_price)} сум</p>
+              <p className="text-right text-xs font-medium text-gray-900">от {formatNumber(item.details[0].month_3_price * 12567)} сум</p>
             </div>
           </div> 
         </div>

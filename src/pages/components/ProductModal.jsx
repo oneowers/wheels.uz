@@ -42,8 +42,8 @@ export default function Example({ item, isOpen, onClose }) {
   const [selected, setSelected] = useState(plans[0])
   const [isModalOpen1, setIsModalOpen1] = useState(false);
 
-  plans[0] = { id: 0, name: 'Рассрочка на 3 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_3_price)} сум` }
-  plans[1] = { id: 1, name: 'Рассрочка на 6 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_6_price)} сум` }
+  plans[0] = { id: 0, name: 'Рассрочка на 3 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_3_price * 12567)} сум` }
+  plans[1] = { id: 1, name: 'Рассрочка на 6 месяца', ram: '0%', cpus: 'Без переплат', disk: '', price: `${formatNumber(item.details[0].month_6_price * 12567)} сум` }
 
 
   product.name = item.title;
@@ -126,7 +126,7 @@ export default function Example({ item, isOpen, onClose }) {
                                 as="span"
                                 className="text-sm border border-gray-300 bg-gray-50 rounded-md p-2"
                               >
-                                {item.details[0].lenght} см
+                                {item.details[0].length} см
                               </p>
                             </div>
                           </div>
