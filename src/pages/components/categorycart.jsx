@@ -38,7 +38,7 @@ const ProductItem = ({ item }) => {
               <div
                 className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg"
               >
-                <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=0`}>
+                <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=1`}>
                   <img
                     src={item.image}
                     alt={item.image}
@@ -48,7 +48,7 @@ const ProductItem = ({ item }) => {
               </div>
               <div className="pb-4 pt-5">
                 <div className="text-base text-gray-900 bg-gray-100 rounded-lg p-2 text-center">
-                  <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=0`}>
+                  <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=1`}>
                     Шины для {item.name}
                     <span className="placeholder col-6"></span>
                   </Link>
