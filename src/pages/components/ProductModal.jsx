@@ -153,7 +153,7 @@ export default function Example({ item, isOpen, onClose }) {
                                 {product.rating} out of 5 stars
                               </p>
                               <a
-                                href="#"
+                                href={process.env.REACT_APP_FRONT_BASE_URL}
                                 className="ml-3 text-sm font-medium text-gray-600 hover:text-gray-500"
                               >
                                 {product.reviewCount} reviews
@@ -252,10 +252,10 @@ export default function Example({ item, isOpen, onClose }) {
                                 </div>
                               </RadioGroup>
                               <div className="mt-4 w-full rounded-t-lg flex justify-between">
-                              <Link to="/" className="bg-gray-200 hover:bg-gray-200/90 text-gray-800 py-2 px-4 rounded">
+                              <Link to={process.env.REACT_APP_FRONT_BASE_URL} className="bg-gray-200 hover:bg-gray-200/90 text-gray-800 py-2 px-4 rounded">
                                 Отменить
                               </Link>
-                              <Link to={`/order/${item.id}/${selected.id}`} className="bg-gray-800 hover:bg-gray-800/90 text-white py-2 px-4 rounded">
+                              <Link to={`${process.env.REACT_APP_FRONT_BASE_URL}/order/${item.id}/${selected.id}`} className="bg-gray-800 hover:bg-gray-800/90 text-white py-2 px-4 rounded">
                                 Подтвердить заказ
                                 </Link>
                             </div>

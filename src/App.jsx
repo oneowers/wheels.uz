@@ -17,7 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={[<Header />, <ProductList />, <Footer />]} />
         <Route path="/wheels/*" exact index element={[<Header />, <HomePage />, <Footer />]} />
-        <Route path="/signin/" element={[<Header />, <SignIn />, <Footer />]} />
+        {/* <Route path="/signin/" element={[<Header />, <SignIn />, <Footer />]} /> */}
         <Route path="/order/:id/:plan" element={[<Orders />]}/>
       </Routes>
     </>

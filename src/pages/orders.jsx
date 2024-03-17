@@ -33,7 +33,7 @@ async function createOrder(orderData) {
     formData.append("quantity", orderData.quantity);
     formData.append("details", orderData.detailsId);
 
-    const response = await fetch("https://linkbuy.uz/api/create_order/", {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/create_order/`, {
       method: "POST",
       body: formData,
     });
@@ -77,7 +77,7 @@ export default function Example() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://linkbuy.uz/api/wheels/${wheelId}`,
+          `${process.env.REACT_APP_API_BASE_URL}/api/wheels/${wheelId}`,
           {
             method: "GET",
             headers: {
@@ -178,7 +178,7 @@ export default function Example() {
   return (
     <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8  sm:px-6 sm:pt-8 md:p-6 lg:p-8">
       <Link
-        to={"/"}
+        to={process.env.REACT_APP_FRONT_BASE_URL}
         className="z-10 absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
       >
         <span className="sr-only">Close</span>
@@ -342,7 +342,7 @@ export default function Example() {
                       </p>
                       <p className="mb-4">Вам позвонят для подтверждения.</p>
                       <Link
-                        to="/"
+                        to={process.env.REACT_APP_FRONT_BASE_URL}
                         className=" px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500"
                       >
                         Закрыть

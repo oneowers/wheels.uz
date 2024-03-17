@@ -14,7 +14,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://linkbuy.uz/api/categories/${categoryId}/`,
+          `${process.env.REACT_APP_API_BASE_URL}/api/categories/${categoryId}/`,
           {
             method: "GET",
             headers: {
@@ -30,7 +30,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
         if (jsonData && jsonData.sizes) {
           const promises = jsonData.sizes.map(async (size) => {
             const response1 = await fetch(
-              `https://linkbuy.uz/api/wheels/?details_size=${size}&page=${page}`,
+              `${process.env.REACT_APP_API_BASE_URL}/api/wheels/?details_size=${size}&page=${page}`,
               {
                 method: "GET",
                 headers: {
@@ -72,7 +72,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
                     </h2>
                     {link && (
                       <a
-                        href="/"
+                        href={process.env.REACT_APP_FRONT_BASE_URL}
                         className={classNames(
                           "cursor-pointer whitespace-nowrap text-sm font-medium text-gray-600 hover:text-gray-900"
                         )}
@@ -95,7 +95,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
                 </div>
                 <div className="my-4 flex justify-center">
                   <a
-                    href={`wheels/?category=1&page=${page+1}`}
+                    href={`${process.env.REACT_APP_FRONT_BASE_URL}/wheels/?category=1&page=${page+1}`}
                     className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                   >
                     Load More
@@ -108,7 +108,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
                   Нет подходящих шин для этого автомобиля.
                 </p>
                 <a
-                  href="/"
+                  href={process.env.REACT_APP_FRONT_BASE_URL}
                   className="text-blue-500 underline hover:text-blue-700"
                 >
                   Вернуться на главную страницу
