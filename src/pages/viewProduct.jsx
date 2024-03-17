@@ -123,7 +123,7 @@ function WithImageGalleryAndExpandableDetails() {
               {product.name}
             </h1>
             
-            <a href={`https://localhost:3000/seller/` + product.seller.id} className="tracking-tight text-blue-900">
+            <a href={`${process.env.REACT_APP_FRONT_BASE_URL}/seller/` + product.seller.id} className="tracking-tight text-blue-900">
               {product.seller.store_name}
             </a>
 

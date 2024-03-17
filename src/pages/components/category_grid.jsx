@@ -6,14 +6,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
   }
 
-const ProductItem = ({ productsCount, api , link, name}) => {
+const ProductItem = ({name}) => {
 
   const [data, setData] = useState();
+  console.log(process.env)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://linkbuy.uz/api/categories/", {
+        const response = await fetch(process.env + `/api/categories/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -38,12 +39,11 @@ return (
             <div className="pt-7 pb-5 sm:pt-7">
             <div className="flex justify-between space-x-4 items-center">
                 <h2 className={classNames("text-3xl font-medium text-gray-900")}>{name}</h2>
-                {link && (<Link to={link}
+                <Link to={`${process.env.REACT_APP_FRONT_BASE_URL}`}
                 className={classNames("cursor-pointer whitespace-nowrap text-sm font-medium text-gray-600 hover:text-gray-900")}>
                 View all
                 <span aria-hidden="true"> &rarr;</span>
                 </Link>
-                )}
             </div>
             </div>
             )}

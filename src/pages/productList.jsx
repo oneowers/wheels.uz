@@ -1,10 +1,10 @@
 
 import CategoryList from './components/category_grid.jsx';
 
-const App = ({ api, productsCount }) => {
+const App = () => {
   return (
     <>
-        <CategoryList productsCount={productsCount} api={api}/>
+        <CategoryList/>
     </>
   );
 };

@@ -95,7 +95,7 @@ const ProductItem = ({ productsCount, link, page, name, categoryId }) => {
                 </div>
                 <div className="my-4 flex justify-center">
                   <a
-                    href={`http://localhost:3000/wheels/?category=1&page=${page+1}`}
+                    href={`wheels/?category=1&page=${page+1}`}
                     className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                   >
                     Load More

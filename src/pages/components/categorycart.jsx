@@ -20,7 +20,7 @@ const ProductItem = ({ item }) => {
         key={item.id}
         className="sm:bg-red-500 lg:hidden md:hidden relative flex sm:py-10 items-center justify-center overflow-hidden"
       >
-        <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=1`}>
+        <Link to={`${process.env.REACT_APP_FRONT_BASE_URL}/wheels/?category=${item.id}&page=1`}>
           <div className="absolute z-10 w-full h-full flex items-center justify-center animate-road">
             <span className="text-black text-7xl  font-bold">{item.name}</span>
           </div>
@@ -38,7 +38,7 @@ const ProductItem = ({ item }) => {
               <div
                 className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg"
               >
-                <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=1`}>
+                <Link to={`${process.env.REACT_APP_FRONT_BASE_URL}/wheels/?category=${item.id}&page=1`}>
                   <img
                     src={item.image}
                     alt={item.image}
@@ -48,7 +48,7 @@ const ProductItem = ({ item }) => {
               </div>
               <div className="pb-4 pt-5">
                 <div className="text-base text-gray-900 bg-gray-100 rounded-lg p-2 text-center">
-                  <Link to={`http://localhost:3000/wheels/?category=${item.id}&page=1`}>
+                  <Link to={`${process.env.REACT_APP_FRONT_BASE_URL}/wheels/?category=${item.id}&page=1`}>
                     Шины для {item.name}
                     <span className="placeholder col-6"></span>
                   </Link>
